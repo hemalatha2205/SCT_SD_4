@@ -24,3 +24,4 @@ A polished Python + Flask web app that scrapes public product information from s
 ## Notes
 - The app is designed for public and practice pages such as Books to Scrape.
 - Some websites may block automated requests, so the scraper gracefully surfaces an error.
+
