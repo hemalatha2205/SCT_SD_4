@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Product Information Extractor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero-card">
+        <div class="hero-copy">
+          <p class="eyebrow">AI-Driven Data Collection</p>
+          <h1>Smart Product Information Extractor</h1>
+          <p class="hero-text">
+            Pull product names, prices, ratings, and images from a public e-commerce catalog and export them instantly.
+          </p>
+        </div>
+        <form id="scrape-form" class="scrape-form">
+          <label for="url" class="sr-only">Website URL</label>
+          <select id="sample-selector" class="sample-select">
+            <option value="https://books.toscrape.com/">Books Sample</option>
+            <option value="https://quotes.toscrape.com/">Quotes Sample</option>
+          </select>
+          <input id="url" name="url" type="url" placeholder="Enter a website URL" value="https://books.toscrape.com/" required />
+          <button type="submit" class="btn btn-primary">
+            <span class="btn-label">Start Scraping</span>
+            <span class="spinner" hidden></span>
+          </button>
+        </form>
+      </header>
+
+      <section class="stats-grid" aria-label="dashboard statistics">
+        <article class="stat-card">
+          <span class="stat-label">Total Products</span>
+          <strong id="total-products">0</strong>
+        </article>
+        <article class="stat-card success">
+          <span class="stat-label">Average Price</span>
+          <strong id="average-price">£0.00</strong>
+        </article>
+        <article class="stat-card warning">
+          <span class="stat-label">Highest Price</span>
+          <strong id="highest-price">£0.00</strong>
+        </article>
+        <article class="stat-card danger">
+          <span class="stat-label">Lowest Price</span>
+          <strong id="lowest-price">£0.00</strong>
+        </article>
+        <article class="stat-card info">
+          <span class="stat-label">Categories</span>
+          <strong id="categories">0</strong>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Product Results</h2>
+          <div class="panel-actions">
+            <button id="refresh-btn" class="btn btn-secondary" type="button">Refresh</button>
+            <a id="export-csv" class="btn btn-success" href="/export/csv">Export CSV</a>
+            <a id="export-json" class="btn btn-warning" href="/export/json">Export JSON</a>
+            <a id="export-excel" class="btn btn-danger" href="/export/excel">Export Excel</a>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <input id="search-input" type="search" placeholder="Search products" />
+          <select id="filter-category">
+            <option value="all">All Categories</option>
+          </select>
+          <select id="filter-rating">
+            <option value="all">All Ratings</option>
+            <option value="5★">5★</option>
+            <option value="4★">4★</option>
+            <option value="3★">3★</option>
+            <option value="2★">2★</option>
+            <option value="1★">1★</option>
+          </select>
+          <select id="filter-price">
+            <option value="all">Any Price</option>
+            <option value="under-15">Under £15</option>
+            <option value="15-25">£15 to £25</option>
+            <option value="above-25">Above £25</option>
+          </select>
+        </div>
+
+        <div id="message-area" class="message" role="status"></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>Category</th>
+                <th>Image</th>
+              </tr>
+            </thead>
+            <tbody id="products-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
