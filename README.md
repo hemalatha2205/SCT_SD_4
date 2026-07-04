@@ -21,6 +21,9 @@ A polished Python + Flask web app that scrapes public product information from s
    ```
 4. Open http://127.0.0.1:5000
 
+## Example URL
+- Example input: https://books.toscrape.com/
+
 ## Notes
 - The app is designed for public and practice pages such as Books to Scrape.
 - Some websites may block automated requests, so the scraper gracefully surfaces an error.
